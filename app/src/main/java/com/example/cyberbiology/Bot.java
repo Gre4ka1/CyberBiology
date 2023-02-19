@@ -19,8 +19,9 @@ public class Bot{
         this.y = y;
         this.code = code;
         this.color = color;
-        this.dx= (new Random().nextInt(3)-1)*50;
-        this.dy= (new Random().nextInt(3)-1)*50;
+        this.dx= (new Random().nextInt(2)-1)*50;
+        this.dy= (new Random().nextInt(2)-1)*50;
+        if (dx==0 && dy==0) dx = 50;
         this.energy=50;
     }
 
@@ -30,8 +31,9 @@ public class Bot{
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             this.color = Color.valueOf((int)(Math.random() * 0x1000000));
         }
-        this.dx= (new Random().nextInt(3)-1)*50;
-        this.dy= (new Random().nextInt(3)-1)*50;
+        this.dx= (new Random().nextInt(2)-1)*50;
+        this.dy= (new Random().nextInt(2)-1)*50;
+        if (dx==0 && dy==0) dx = 50;
         this.energy=50;
         this.code= new short[16];
         for (int i = 0; i < code.length; i++) {
@@ -39,12 +41,14 @@ public class Bot{
         }
     }
     public void draw(Canvas canvas, Paint paint){
-        System.out.println(x+" "+y);
-        canvas.drawRect(x,y, x+50,y+50,paint);
+        canvas.drawRect(x,y, (x+50),(y+50),paint);
     }
     public void move(){
-        x+=dx;
-        y+=dy;
+        System.out.println(x+" "+y);
+        x=x+dx;
+        y=y+dy;
+        System.out.println("d: "+dx+" "+dy);
+        System.out.println(x+" "+y);
     }
     public void generate(){
         energy+=25;
